@@ -32,6 +32,7 @@ public:
 	typedef void (*input_detected_cb)(u32 code, bool analog, bool positive);
 
 	const std::string& api_name() { return _api_name; }
+	const std::string& api_id() { return _api_id; }
 	const std::string& name() { return _name; }
 	int maple_port() const { return _maple_port; }
 	virtual void set_maple_port(int port) { _maple_port = port; }
@@ -76,8 +77,8 @@ public:
 	bool isPerGameMapping() const { return perGameMapping; }
 
 protected:
-	GamepadDevice(int maple_port, const char *api_name, bool remappable = true)
-		: _api_name(api_name), _maple_port(maple_port), _input_detected(nullptr), _remappable(remappable),
+	GamepadDevice(int maple_port, const char *api_name, const char *api_id = NULL, bool remappable = true)
+		: _api_name(api_name), _api_id(api_id?:""), _maple_port(maple_port), _input_detected(nullptr), _remappable(remappable),
 		  digitalToAnalogState{}
 	{
 	}
@@ -133,6 +134,7 @@ private:
 	}
 
 	std::string _api_name;
+	std::string _api_id;
 	int _maple_port;
 	bool _detecting_button = false;
 	bool _detecting_axis = false;

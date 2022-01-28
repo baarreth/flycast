@@ -53,7 +53,10 @@ static void sdl_open_joystick(int index)
 		INFO_LOG(INPUT, "SDL: Cannot open joystick %d", index + 1);
 		return;
 	}
-	std::shared_ptr<SDLGamepad> gamepad = std::make_shared<SDLGamepad>(index < MAPLE_PORTS ? index : -1, index, pJoystick);
+	SDL_JoystickGUID sdl_guid = SDL_JoystickGetGUID(pJoystick);
+	char sdl_guid_str[1024];
+	SDL_JoystickGetGUIDString(sdl_guid, sdl_guid_str, sizeof(sdl_guid_str));
+	std::shared_ptr<SDLGamepad> gamepad = std::make_shared<SDLGamepad>(index < MAPLE_PORTS ? index : -1, index, pJoystick, sdl_guid_str);
 	SDLGamepad::AddSDLGamepad(gamepad);
 }
 

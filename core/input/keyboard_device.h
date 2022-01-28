@@ -55,7 +55,7 @@ class KeyboardDevice : public GamepadDevice
 {
 protected:
 	KeyboardDevice(int maple_port, const char* apiName, bool remappable = true)
-		: GamepadDevice(maple_port, apiName, remappable) {
+		: GamepadDevice(maple_port, apiName, NULL, remappable) {
 		_name = "Keyboard";
 	}
 

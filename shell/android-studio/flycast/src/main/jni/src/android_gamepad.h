@@ -96,7 +96,7 @@ class AndroidGamepadDevice : public GamepadDevice
 public:
 	AndroidGamepadDevice(int maple_port, int id, const char *name, const char *unique_id,
 			const std::vector<int>& fullAxes, const std::vector<int>& halfAxes)
-		: GamepadDevice(maple_port, "Android", id != VIRTUAL_GAMEPAD_ID), android_id(id),
+		: GamepadDevice(maple_port, "Android", NULL, id != VIRTUAL_GAMEPAD_ID), android_id(id),
 		  fullAxes(fullAxes), halfAxes(halfAxes)
 	{
 		_name = name;

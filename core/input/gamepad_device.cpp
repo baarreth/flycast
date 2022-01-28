@@ -292,11 +292,15 @@ void GamepadDevice::load_system_mappings()
 
 std::string GamepadDevice::make_mapping_filename(bool instance, int system, bool perGame /* = false */)
 {
-	std::string mapping_file = api_name() + "_" + name();
+	std::string mapping_file = api_name()/* + "_" + name()*/;
+	if (!api_id().empty())
+		mapping_file += "_" + api_id();
 	if (instance)
 		mapping_file += "-" + _unique_id;
 	if (perGame && !settings.content.gameId.empty())
 		mapping_file += "_" + settings.content.gameId;
+	// what about putting the controller name after the IDs?
+	mapping_file += "_" + name();
 	if (system != DC_PLATFORM_DREAMCAST)
 		mapping_file += "_arcade";
 	std::replace(mapping_file.begin(), mapping_file.end(), '/', '-');

@@ -152,13 +152,13 @@ public:
 class SDLGamepad : public GamepadDevice
 {
 public:
-	SDLGamepad(int maple_port, int joystick_idx, SDL_Joystick* sdl_joystick)
-		: GamepadDevice(maple_port, "SDL"), sdl_joystick(sdl_joystick)
+	SDLGamepad(int maple_port, int joystick_idx, SDL_Joystick* sdl_joystick, const char * sdl_guid)
+		: GamepadDevice(maple_port, "SDL", sdl_guid), sdl_joystick(sdl_joystick)
 	{
 		_name = SDL_JoystickName(sdl_joystick);
 		sdl_joystick_instance = SDL_JoystickInstanceID(sdl_joystick);
 		_unique_id = "sdl_joystick_" + std::to_string(sdl_joystick_instance);
-		INFO_LOG(INPUT, "SDL: Opened joystick %d on port %d: '%s' unique_id=%s", sdl_joystick_instance, maple_port, _name.c_str(), _unique_id.c_str());
+		INFO_LOG(INPUT, "SDL: Opened joystick %d on port %d: '%s' unique_id=%s sdl_guid=%s", sdl_joystick_instance, maple_port, _name.c_str(), _unique_id.c_str(), sdl_guid);
 
 		if (SDL_IsGameController(joystick_idx))
 		{
